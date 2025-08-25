@@ -188,25 +188,40 @@ def apply_actions(actions: List[Dict[str, Any]]) -> List[str]:
 
 
 @app.post("/chat")
-def chat(req: ChatRequest):
-    parsed = parse_intent(req.message)
+def chat(request: ChatRequest):
+    query = request.query.lower()
+    response = "🤖 I can help control fan, light, AC or adjust temperature. You can also schedule: 'Turn on light at 6 PM'."
 
-    if parsed.get("smalltalk") and not parsed.get("actions"):
-        return {"reply": parsed["smalltalk"], "devices": devices, "actions": []}
+    if "turn on fan" in query:
+        response = "🌀 Fan turned ON."
+    elif "turn off fan" in query:
+        response = "🌀 Fan turned OFF."
+    elif "turn on light" in query:
+        response = "💡 Light turned ON."
+    elif "turn off light" in query:
+        response = "💡 Light turned OFF."
+    elif "turn on ac" in query:
+        response = "❄️ AC turned ON."
+    elif "turn off ac" in query:
+        response = "❄️ AC turned OFF."
+    
+    # ✅ Add temperature setting for AC
+    elif "set ac at" in query or "adjust ac at" in query:
+        try:
+            temp = int(query.split("at")[-1].strip())
+            response = f"❄️ AC temperature set to {temp}°C."
+        except:
+            response = "⚠️ Please specify a valid temperature (e.g., 'set ac at 18')."
+    
+    elif "increase ac" in query:
+        try:
+            temp = int(query.split("at")[-1].strip())
+            response = f"❄️ AC temperature increased to {temp}°C."
+        except:
+            response = "⚠️ Please specify a valid temperature (e.g., 'increase ac at 20')."
 
-    if parsed.get("schedule"):
-        return {"reply": parsed["schedule"], "devices": devices, "scheduled": scheduled_tasks}
+    return {"conversation": [{"role": "bot", "content": response}]}
 
-    actions = parsed.get("actions", [])
-    if not actions:
-        return {
-            "reply": "🤖 I can help control fan, light, AC or adjust temperature. You can also schedule: 'Turn on light at 6 PM'.",
-            "devices": devices,
-            "actions": []
-        }
-
-    replies = apply_actions(actions)
-    return {"reply": " ".join(replies), "devices": devices, "actions": actions}
 
 
 
