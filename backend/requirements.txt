@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pydantic
+pandas
+numpy
+<<<<<<< HEAD
+=======
+apscheduler
+>>>>>>> a69096ac3a8e5d679cd246b1ebe8423a4c82c726
+transformers
+torch
