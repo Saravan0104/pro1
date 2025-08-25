@@ -5,8 +5,11 @@ import { Card, CardContent } from "@/components/ui/card";
 export default function ReportPanel() {
   const [reports, setReports] = useState([]);
 
+  // Base API URL (Render backend)
+  const API_URL = "https://pro1-1-back.onrender.com";
+
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/reports")
+    fetch(`${API_URL}/reports`)
       .then((res) => res.json())
       .then((data) => setReports(data))
       .catch((err) => console.error("Error fetching reports:", err));

@@ -11,9 +11,12 @@ export default function ControlPanel() {
     testingRoomMachine: false,
   });
 
-  // Fetch current states from backend (optional)
+  // Base API URL (Render backend)
+  const API_URL = "https://pro1-1-back.onrender.com";
+
+  // Fetch current states from backend
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/devices/status")
+    fetch(`${API_URL}/devices/status`)
       .then((res) => res.json())
       .then((data) => setDevices(data))
       .catch((err) => console.error("Error fetching device status:", err));
@@ -22,11 +25,15 @@ export default function ControlPanel() {
   // Toggle device state
   const toggleDevice = async (deviceName) => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/devices/control", {
+      const response = await fetch(`${API_URL}/devices/control`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ device: deviceName, state: !devices[deviceName] }),
+        body: JSON.stringify({
+          device: deviceName,
+          state: !devices[deviceName],
+        }),
       });
+
       const data = await response.json();
       setDevices((prev) => ({ ...prev, [deviceName]: data.state }));
     } catch (error) {
