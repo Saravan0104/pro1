@@ -15,7 +15,7 @@ app = FastAPI(title="Hospital IoT LLM Backend")
 # CORS (allow Vite dev server)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # for dev; restrict in prod
+    allow_origins=["https://pro1-1-front.onrender.com"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -28,7 +28,8 @@ devices = {
     "ac": False,
     "temperature": 24,  # °C
 }
-
+  
+  
 # scheduler for timed tasks
 scheduler = BackgroundScheduler()
 scheduler.start()
