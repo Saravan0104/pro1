@@ -3,9 +3,10 @@ uvicorn
 pydantic
 pandas
 numpy
-<<<<<<< HEAD
-=======
 apscheduler
->>>>>>> a69096ac3a8e5d679cd246b1ebe8423a4c82c726
 transformers
 torch
+fastapi==0.115.0
+uvicorn==0.30.6
+transformers==4.44.2
+torch==2.4.0
