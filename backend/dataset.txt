@@ -1,0 +1,89 @@
+User: turn on fan
+Assistant: {"tokens": ["turn", "on", "fan"], "sentiment": "neutral", "sentiment_reason": "Direct command", "intent": {"device": "fan", "action": "on", "value": null}, "task_status": "Fan turned ON", "conversational_response": "Got it, the fan is now ON to keep you comfortable!"}
+
+User: I'm hot, turn off AC
+Assistant: {"tokens": ["I'm", "hot", "turn", "off", "AC"], "sentiment": "negative", "sentiment_reason": "Expresses discomfort", "intent": {"device": "AC", "action": "off", "value": null}, "task_status": "AC turned OFF", "conversational_response": "I’m sorry you’re feeling hot! The AC is turned OFF now."}
+
+User: increase temperature by 2
+Assistant: {"tokens": ["increase", "temperature", "by", "2"], "sentiment": "neutral", "sentiment_reason": "Specific command", "intent": {"device": "temperature", "action": "increase", "value": 2}, "task_status": "Temperature increased by 2", "conversational_response": "Alright, I’ve raised the temperature by 2 degrees for you."}
+
+User: hello, how’s the room?
+Assistant: {"tokens": ["hello", "how’s", "the", "room"], "sentiment": "neutral", "sentiment_reason": "General inquiry", "intent": {"device": "room", "action": "check", "value": null}, "task_status": "Room status checked", "conversational_response": "Hi! The room is comfortable, with a temperature of 24°C. Anything else I can help with?"}
+
+User: I’m cold, turn on heater
+Assistant: {"tokens": ["I’m", "cold", "turn", "on", "heater"], "sentiment": "negative", "sentiment_reason": "Expresses discomfort", "intent": {"device": "heater", "action": "on", "value": null}, "task_status": "Heater turned ON", "conversational_response": "Sorry you’re feeling cold! The heater is now ON to warm you up."}
+
+User: turn off light
+Assistant: {"tokens": ["turn", "off", "light"], "sentiment": "neutral", "sentiment_reason": "Direct command", "intent": {"device": "light", "action": "off", "value": null}, "task_status": "Light turned OFF", "conversational_response": "Light turned OFF for you!"}
+
+User: it’s too bright
+Assistant: {"tokens": ["it’s", "too", "bright"], "sentiment": "negative", "sentiment_reason": "Expresses discomfort with brightness", "intent": {"device": "light", "action": "decrease", "value": null}, "task_status": "Light brightness decreased", "conversational_response": "I understand it’s too bright. I’ve dimmed the light for you."}
+
+User: hi, can you turn on AC?
+Assistant: {"tokens": ["hi", "can", "you", "turn", "on", "AC"], "sentiment": "neutral", "sentiment_reason": "Polite request", "intent": {"device": "AC", "action": "on", "value": null}, "task_status": "AC turned ON", "conversational_response": "Hello! The AC is now ON to keep you cool."}
+
+User: lower temperature by 1
+Assistant: {"tokens": ["lower", "temperature", "by", "1"], "sentiment": "neutral", "sentiment_reason": "Specific command", "intent": {"device": "temperature", "action": "decrease", "value": 1}, "task_status": "Temperature decreased by 1", "conversational_response": "Temperature lowered by 1 degree as requested!"}
+
+User: I’m feeling warm
+Assistant: {"tokens": ["I’m", "feeling", "warm"], "sentiment": "negative", "sentiment_reason": "Expresses discomfort", "intent": {"device": "AC", "action": "on", "value": null}, "task_status": "AC turned ON", "conversational_response": "I’m sorry you’re warm! I’ve turned on the AC to cool you down."}
+
+User: switch on light please
+Assistant: {"tokens": ["switch", "on", "light", "please"], "sentiment": "neutral", "sentiment_reason": "Polite command", "intent": {"device": "light", "action": "on", "value": null}, "task_status": "Light turned ON", "conversational_response": "Sure thing, the light is ON now!"}
+
+User: decrease fan speed
+Assistant: {"tokens": ["decrease", "fan", "speed"], "sentiment": "neutral", "sentiment_reason": "Direct command", "intent": {"device": "fan", "action": "decrease", "value": null}, "task_status": "Fan speed decreased", "conversational_response": "Fan speed lowered for you!"}
+
+User: it’s too hot in here
+Assistant: {"tokens": ["it’s", "too", "hot", "in", "here"], "sentiment": "negative", "sentiment_reason": "Expresses discomfort", "intent": {"device": "AC", "action": "on", "value": null}, "task_status": "AC turned ON", "conversational_response": "I hear you, it’s too hot! AC is ON to make you comfortable."}
+
+User: turn off heater
+Assistant: {"tokens": ["turn", "off", "heater"], "sentiment": "neutral", "sentiment_reason": "Direct command", "intent": {"device": "heater", "action": "off", "value": null}, "task_status": "Heater turned OFF", "conversational_response": "Heater turned OFF as requested."}
+
+User: raise AC by 3 degrees
+Assistant: {"tokens": ["raise", "AC", "by", "3", "degrees"], "sentiment": "neutral", "sentiment_reason": "Specific command", "intent": {"device": "AC", "action": "increase", "value": 3}, "task_status": "AC increased by 3", "conversational_response": "I’ve raised the AC by 3 degrees for you!"}
+
+User: fan off now
+Assistant: {"tokens": ["fan", "off", "now"], "sentiment": "neutral", "sentiment_reason": "Direct command with urgency", "intent": {"device": "fan", "action": "off", "value": null}, "task_status": "Fan turned OFF", "conversational_response": "Fan is OFF now, as you asked!"}
+
+User: I’m freezing
+Assistant: {"tokens": ["I’m", "freezing"], "sentiment": "negative", "sentiment_reason": "Expresses discomfort", "intent": {"device": "heater", "action": "on", "value": null}, "task_status": "Heater turned ON", "conversational_response": "Oh no, you’re freezing! I’ve turned on the heater to warm you up."}
+
+User: turn on light, it’s dark
+Assistant: {"tokens": ["turn", "on", "light", "it’s", "dark"], "sentiment": "negative", "sentiment_reason": "Expresses discomfort with darkness", "intent": {"device": "light", "action": "on", "value": null}, "task_status": "Light turned ON", "conversational_response": "It’s dark? I’ve turned the light ON for you!"}
+
+User: lower AC by 2
+Assistant: {"tokens": ["lower", "AC", "by", "2"], "sentiment": "neutral", "sentiment_reason": "Specific command", "intent": {"device": "AC", "action": "decrease", "value": 2}, "task_status": "AC decreased by 2", "conversational_response": "AC lowered by 2 degrees to keep you comfy!"}
+
+User: hi, what’s the temperature?
+Assistant: {"tokens": ["hi", "what’s", "the", "temperature"], "sentiment": "neutral", "sentiment_reason": "General inquiry", "intent": {"device": "temperature", "action": "check", "value": null}, "task_status": "Temperature checked", "conversational_response": "Hello! The room temperature is 24°C right now. Anything else I can do?"}
+
+User: increase fan speed
+Assistant: {"tokens": ["increase", "fan", "speed"], "sentiment": "neutral", "sentiment_reason": "Direct command", "intent": {"device": "fan", "action": "increase", "value": null}, "task_status": "Fan speed increased", "conversational_response": "Fan speed turned up for you!"}
+
+User: it’s stuffy, turn on fan
+Assistant: {"tokens": ["it’s", "stuffy", "turn", "on", "fan"], "sentiment": "negative", "sentiment_reason": "Expresses discomfort", "intent": {"device": "fan", "action": "on", "value": null}, "task_status": "Fan turned ON", "conversational_response": "Feeling stuffy? I’ve turned the fan ON to freshen things up!"}
+
+User: switch off AC
+Assistant: {"tokens": ["switch", "off", "AC"], "sentiment": "neutral", "sentiment_reason": "Direct command", "intent": {"device": "AC", "action": "off", "value": null}, "task_status": "AC turned OFF", "conversational_response": "AC is OFF now, as you wanted!"}
+
+User: I’m feeling good, keep it like this
+Assistant: {"tokens": ["I’m", "feeling", "good", "keep", "it", "like", "this"], "sentiment": "positive", "sentiment_reason": "Expresses satisfaction", "intent": {"device": null, "action": "maintain", "value": null}, "task_status": "Settings maintained", "conversational_response": "Great to hear you’re feeling good! I’ll keep everything as is."}
+
+User: dim the light
+Assistant: {"tokens": ["dim", "the", "light"], "sentiment": "neutral", "sentiment_reason": "Direct command", "intent": {"device": "light", "action": "decrease", "value": null}, "task_status": "Light brightness decreased", "conversational_response": "Light dimmed for a cozier feel!"}
+
+User: turn heater off please
+Assistant: {"tokens": ["turn", "heater", "off", "please"], "sentiment": "neutral", "sentiment_reason": "Polite command", "intent": {"device": "heater", "action": "off", "value": null}, "task_status": "Heater turned OFF", "conversational_response": "Heater turned OFF for you!"}
+
+User: make it warmer
+Assistant: {"tokens": ["make", "it", "warmer"], "sentiment": "negative", "sentiment_reason": "Implies discomfort", "intent": {"device": "temperature", "action": "increase", "value": null}, "task_status": "Temperature increased", "conversational_response": "Let’s warm things up! Temperature increased."}
+
+User: check room temperature
+Assistant: {"tokens": ["check", "room", "temperature"], "sentiment": "neutral", "sentiment_reason": "General inquiry", "intent": {"device": "temperature", "action": "check", "value": null}, "task_status": "Temperature checked", "conversational_response": "The room temperature is 24°C. Feeling okay?"}
+
+User: turn on AC, it’s warm
+Assistant: {"tokens": ["turn", "on", "AC", "it’s", "warm"], "sentiment": "negative", "sentiment_reason": "Expresses discomfort", "intent": {"device": "AC", "action": "on", "value": null}, "task_status": "AC turned ON", "conversational_response": "Warm, huh? I’ve turned the AC ON to cool you down!"}
+
+User: raise light brightness by 5
+Assistant: {"tokens": ["raise", "light", "brightness", "by", "5"], "sentiment": "neutral", "sentiment_reason": "Specific command", "intent": {"device": "light", "action": "increase", "value": 5}, "task_status": "Light increased by 5", "conversational_response": "Brightening things up! Light increased by 5."}
