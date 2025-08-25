@@ -1,6 +1,6 @@
 import os
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Dict, Any, List, Optional
@@ -9,24 +9,24 @@ from datetime import datetime, timedelta
 import re
 import logging
 
-# Configure logging for Render (logs to console and file for debugging)
+# Configure logging for Render (console and file)
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
         logging.FileHandler('app.log'),
-        logging.StreamHandler()  # Logs to console for Render's log viewer
+        logging.StreamHandler()  # For Render's log viewer
     ]
 )
 
 app = FastAPI(title="Hospital IoT LLM Backend")
 
-# CORS configuration for Render frontend and local dev
+# CORS configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://pro1-1-front.onrender.com",
-        "http://localhost:3000"  # For local frontend development
+        "http://localhost:3000"  # For local dev
     ],
     allow_credentials=True,
     allow_methods=["GET", "POST"],
@@ -57,10 +57,12 @@ class DeviceCommand(BaseModel):
 
 @app.get("/")
 def root():
+    logging.info("Root endpoint accessed")
     return {"message": "Hospital IoT LLM Backend is running on Render", "devices": devices}
 
 @app.get("/state")
 def get_state():
+    logging.info("State endpoint accessed")
     return {"devices": devices, "scheduled": scheduled_tasks}
 
 @app.post("/device")
@@ -68,19 +70,19 @@ def device_control(cmd: DeviceCommand):
     d = cmd.device.lower()
     if d not in devices:
         logging.error(f"Unknown device: {d}")
-        return {"ok": False, "error": f"Unknown device '{cmd.device}'", "devices": devices}
-
+        raise HTTPException(status_code=400, detail=f"Unknown device '{cmd.device}'")
+    
     if d == "temperature":
         if cmd.delta is None:
             logging.error("Temperature change requires delta")
-            return {"ok": False, "error": "Provide delta to change temperature", "devices": devices}
+            raise HTTPException(status_code=400, detail="Provide delta to change temperature")
         devices["temperature"] = max(16, min(30, devices["temperature"] + int(cmd.delta)))
         logging.info(f"Temperature set to {devices['temperature']}°C")
         return {"ok": True, "message": f"Temperature set to {devices['temperature']}°C", "devices": devices}
 
     if cmd.state is None:
         logging.error("Device state change requires state")
-        return {"ok": False, "error": "Provide state=true/false", "devices": devices}
+        raise HTTPException(status_code=400, detail="Provide state=true/false")
     devices[d] = bool(cmd.state)
     logging.info(f"{d.capitalize()} turned {'ON' if devices[d] else 'OFF'}")
     return {"ok": True, "message": f"{d.capitalize()} turned {'ON' if devices[d] else 'OFF'}", "devices": devices}
@@ -199,27 +201,31 @@ def apply_actions(actions: List[Dict[str, Any]]) -> List[str]:
 
 @app.post("/chat")
 def chat(request: ChatRequest):
-    query = request.message.lower()
-    intent = parse_intent(query)
-    logging.info(f"Intent parsed: {intent}")
+    try:
+        query = request.message.lower()
+        logging.info(f"Received chat request: {query}")
+        intent = parse_intent(query)
+        logging.info(f"Intent parsed: {intent}")
 
-    conversation = [{"role": "user", "content": request.message}]
+        conversation = [{"role": "user", "content": request.message}]
 
-    if "smalltalk" in intent:
-        response = intent["smalltalk"]
-    elif "schedule" in intent:
-        response = intent["schedule"]
-    elif "actions" in intent and intent["actions"]:
-        responses = apply_actions(intent["actions"])
-        response = " ".join(responses)
-    else:
-        response = "🤖 I can help control fan, light, AC, or adjust temperature. You can also schedule: 'Turn on light at 6 PM'."
+        if "smalltalk" in intent:
+            response = intent["smalltalk"]
+        elif "schedule" in intent:
+            response = intent["schedule"]
+        elif "actions" in intent and intent["actions"]:
+            responses = apply_actions(intent["actions"])
+            response = " ".join(responses)
+        else:
+            response = "🤖 I can help control fan, light, AC, or adjust temperature. You can also schedule: 'Turn on light at 6 PM'."
 
-    conversation.append({"role": "bot", "content": response})
-    logging.info(f"Response: {response}")
-    return {"conversation": conversation}
+        conversation.append({"role": "bot", "content": response})
+        logging.info(f"Response sent: {response}")
+        return {"conversation": conversation}
+    except Exception as e:
+        logging.error(f"Error processing chat request: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
-# Shutdown scheduler gracefully on app termination
 @app.on_event("shutdown")
 def shutdown_scheduler():
     scheduler.shutdown()
