@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 // Replace localhost with your Render backend URL
-const BASE_URL = "https://your-backend-service.onrender.com";
+const BASE_URL = "https://pro1-1-back.onrender.com";
 
 
 // --- Embedded Chatbot component (no external import!) ---
